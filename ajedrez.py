@@ -8,7 +8,12 @@ def imprimir_tablero(fichas): # Imprime el tablero de ajedrez
             print(fichas[i][j], end=" ") # Imprime la ficha
         print()
 
-
+def guardar_tablero(fichas, nombre): # Guarda el tablero en un archivo
+    nombretxt = nombre + ".txt"
+    with open (nombretxt, 'a') as archivo:
+        for i in range(8):
+            archivo.writelines(fichas[i]) # Escribe la fila
+        archivo.close()
 
 def inicio(fichas): # Menú de inicio
     print("Bienvenido al ajedrez")
