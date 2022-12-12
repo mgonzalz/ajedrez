@@ -1,7 +1,7 @@
 from datos import fichas
 
 def imprimir_tablero(fichas): # Imprime el tablero de ajedrez
-    print("  A B C D E F G H")
+    print("  1 2 3 4 5 6 7 8")
     for i in range(8):
         print(i+1, end=" ") # Imprime el número de la fila
         for j in range(8):
@@ -14,6 +14,7 @@ def guardar_tablero(fichas, nombre): # Guarda el tablero en un archivo
         for i in range(8):
             archivo.writelines(fichas[i]) # Escribe la fila
         archivo.close()
+    movimiento(fichas)
 
 def inicio(fichas): # Menú de inicio
     print("Bienvenido al ajedrez")
@@ -30,21 +31,22 @@ def inicio(fichas): # Menú de inicio
         inicio()
 
 def movimiento(fichas): # Movimiento de las fichas
+    imprimir_tablero(fichas)
     fila = int(input("Ingrese la fila de la ficha: "))
     columna = int(input("Ingrese la columna de la ficha: "))
     if fila > 8 or columna > 8:
         print("Opción no válida")
         movimiento(fichas)
     else:
-        ficha = fichas[fila-1][columna-1]
+        ficha = fichas[fila-1][columna-1] # Ficha a mover
         fila_nueva = int(input("Ingrese la fila a la que desea mover la ficha: "))
         columna_nueva = int(input("Ingrese la columna a la que desea mover la ficha: "))
-        if fichas[fila_nueva-1][columna_nueva-1] == " ":
+        if fichas[fila_nueva-1][columna_nueva-1] == " ": # Si la posición a la que se quiere mover está vacía
             fichas[fila_nueva-1][columna_nueva-1] = ficha
             fichas[fila-1][columna-1] = ' '
             imprimir_tablero(fichas)
             juego(fichas)
-        elif fichas[fila_nueva][columna_nueva] != " ":
+        elif fichas[fila_nueva][columna_nueva] != " ": # Si la posición a la que se quiere mover está ocupada
             print("No puede mover la ficha a esa posición")
             movimiento(fichas)
 
