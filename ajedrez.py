@@ -14,7 +14,6 @@ def guardar_tablero(fichas, nombre): # Guarda el tablero en un archivo
         for i in range(8):
             archivo.writelines(fichas[i]) # Escribe la fila
         archivo.close()
-    movimiento(fichas)
 
 def inicio(fichas): # Menú de inicio
     print("Bienvenido al ajedrez")
@@ -55,6 +54,11 @@ def juego(fichas): # Juego
     if pregunta == 1:
         nombre = input("Ingrese el nombre del archivo: ")
         guardar_tablero(fichas, nombre)
+        pregunta2 = int(input("¿Desea hacer movimientos? 1. Si 2. No: "))
+        if pregunta2 == 1:
+            movimiento(fichas)
+        elif pregunta2 == 2:
+            print("Gracias por jugar")
     elif pregunta == 2:
         movimiento(fichas)
     else:
