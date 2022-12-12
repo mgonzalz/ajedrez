@@ -1,7 +1,7 @@
 from datos import fichas
 
 def imprimir_tablero(fichas): # Imprime el tablero de ajedrez
-    print("  1 2 3 4 5 6 7 8")
+    print("  A B C D E F G H")
     for i in range(8):
         print(i+1, end=" ") # Imprime el número de la fila
         for j in range(8):
@@ -9,7 +9,7 @@ def imprimir_tablero(fichas): # Imprime el tablero de ajedrez
         print()
 
 def guardar_tablero(fichas, nombre): # Guarda el tablero en un archivo
-    nombretxt = nombre + ".txt"
+    nombretxt = "movimientos/" + nombre + ".txt" # Nombre del archivos
     with open (nombretxt, 'a', encoding = 'utf-8') as archivo: # Abre el archivo
         archivo.writelines('\n')
         for i in range(8): # Recorre las filas
@@ -41,7 +41,7 @@ def movimiento(fichas): # Movimiento de las fichas
     if fila > 8 or columna > 8:
         print("Opción no válida")
         movimiento(fichas)
-    else:
+    elif 0<fila<9 and 0<columna<9:
         ficha = fichas[fila-1][columna-1] # Ficha a mover
         columna_nueva = input("Ingrese la columna a la que desea mover la ficha: ")
         fila_nueva = int(input("Ingrese la fila a la que desea mover la ficha: "))
@@ -54,6 +54,12 @@ def movimiento(fichas): # Movimiento de las fichas
         elif fichas[fila_nueva][columna_nueva] != " ": # Si la posición a la que se quiere mover está ocupada
             print("No puede mover la ficha a esa posición")
             movimiento(fichas)
+        else:
+            print("No puede mover la ficha a esa posición")
+            movimiento(fichas)
+    else:
+        print("No puede mover la ficha a esa posición")
+        movimiento(fichas)
 
 
 def juego(fichas): # Juego
