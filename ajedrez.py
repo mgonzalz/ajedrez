@@ -60,7 +60,7 @@ def juego(fichas): # Juego
         elif pregunta2 == 2:
             print("Gracias por jugar")
     elif pregunta == 2:
-        movimiento(fichas)
+        print("Gracias por jugar")
     else:
         print("Opción no válida")
         inicio(fichas)
