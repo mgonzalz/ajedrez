@@ -10,7 +10,7 @@ def imprimir_tablero(fichas): # Imprime el tablero de ajedrez
 
 def guardar_tablero(fichas, nombre): # Guarda el tablero en un archivo
     nombretxt = nombre + ".txt"
-    with open (nombretxt, 'a') as archivo:
+    with open (nombretxt, 'a', encoding = 'utf-8') as archivo:
         for i in range(8):
             archivo.writelines(fichas[i]) # Escribe la fila
         archivo.close()
@@ -28,6 +28,7 @@ def inicio(fichas): # Menú de inicio
     else:
         print("Opción no válida")
         inicio()
+
 
 def movimiento(fichas): # Movimiento de las fichas
     imprimir_tablero(fichas)
@@ -49,6 +50,7 @@ def movimiento(fichas): # Movimiento de las fichas
             print("No puede mover la ficha a esa posición")
             movimiento(fichas)
 
+
 def juego(fichas): # Juego
     pregunta = int(input("¿Desea guardar este tablero? 1. Si 2. No: ")) # Desea guardar el tablero en un archivo
     if pregunta == 1:
@@ -64,6 +66,3 @@ def juego(fichas): # Juego
     else:
         print("Opción no válida")
         inicio(fichas)
-
-if __name__ == '__main__':
-    inicio(fichas)
