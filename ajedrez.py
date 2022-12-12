@@ -1,17 +1,58 @@
-fichas=     [['♜',	'♞',	'♝',	'♛',   '♚', 	'♝', 	'♞', 	'♜'],
-            ['♟',	'♟',	'♟',	'♟',   '♟', 	'♟', 	'♟', 	'♟'],
-            [' ',	' ',	' ',	' ',   ' ', 	' ', 	' ', 	' '],
-            [' ',	' ',	' ',	' ',   ' ', 	' ', 	' ', 	' '],
-            [' ',	' ',	' ',	' ',   ' ', 	' ', 	' ', 	' '],
-            [' ',	' ',	' ',	' ',   ' ', 	' ', 	' ', 	' '],
-            ['♙',	'♙',	'♙',	'♙',   '♙', 	'♙', 	'♙', 	'♙'],
-            ['♖',	'♘',	'♗',	'♕',   '♔', 	'♗', 	'♘', 	'♖']]
-# Path: ajedrez.py
-def imprimir_tablero():
+from datos import fichas
+
+def imprimir_tablero(fichas): # Imprime el tablero de ajedrez
     print("  A B C D E F G H")
     for i in range(8):
-        print(i+1, end=" ")
+        print(i+1, end=" ") # Imprime el número de la fila
         for j in range(8):
-            print(fichas[i][j], end=" ")
+            print(fichas[i][j], end=" ") # Imprime la ficha
         print()
 
+
+
+def inicio(fichas): # Menú de inicio
+    print("Bienvenido al ajedrez")
+    print("1. Jugar")
+    print("2. Salir")
+    opcion = int(input("Ingrese una opción: "))
+    if opcion == 1:
+        imprimir_tablero(fichas)
+        juego(fichas)
+    elif opcion == 2:
+        print("Gracias por jugar")
+    else:
+        print("Opción no válida")
+        inicio()
+
+def movimiento(fichas): # Movimiento de las fichas
+    fila = int(input("Ingrese la fila de la ficha: "))
+    columna = int(input("Ingrese la columna de la ficha: "))
+    if fila > 8 or columna > 8:
+        print("Opción no válida")
+        movimiento(fichas)
+    else:
+        ficha = fichas[fila-1][columna-1]
+        fila_nueva = int(input("Ingrese la fila a la que desea mover la ficha: "))
+        columna_nueva = int(input("Ingrese la columna a la que desea mover la ficha: "))
+        if fichas[fila_nueva-1][columna_nueva-1] == " ":
+            fichas[fila_nueva-1][columna_nueva-1] = ficha
+            fichas[fila-1][columna-1] = ' '
+            imprimir_tablero(fichas)
+            juego(fichas)
+        elif fichas[fila_nueva][columna_nueva] != " ":
+            print("No puede mover la ficha a esa posición")
+            movimiento(fichas)
+
+def juego(fichas): # Juego
+    pregunta = int(input("¿Desea guardar este tablero? 1. Si 2. No: ")) # Desea guardar el tablero en un archivo
+    if pregunta == 1:
+        nombre = input("Ingrese el nombre del archivo: ")
+        guardar_tablero(fichas, nombre)
+    elif pregunta == 2:
+        movimiento(fichas)
+    else:
+        print("Opción no válida")
+        inicio(fichas)
+
+if __name__ == '__main__':
+    inicio(fichas)
